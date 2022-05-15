@@ -15,9 +15,9 @@ class SiteConfig:
 
     NUMBER_SEARCHED_WORD = 3
 
-    USER_EMAIL = 'vladanoxun@gmail.com'
+    USER_EMAIL = "here's your email"
 
-    USER_PASSWORD = 'Anikron009'
+    USER_PASSWORD = "here's your password"
 
     PAYMENT_OUT_METHOD = 'paypal'  # payment output method by PayPal
 
