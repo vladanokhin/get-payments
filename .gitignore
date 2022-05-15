@@ -1,0 +1,5 @@
+.idea/
+__pycache__/
+env/
+test.py
+.DS_Store
