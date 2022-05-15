@@ -1,9 +1,10 @@
-from browser import BrowserController
+from sites import SitePaidLikes
 
 
 if __name__ == '__main__':
-    browser = BrowserController()
-    # print(browser.site.check_connection_to_site(browser.cfg.SITE_URL))
+    site = SitePaidLikes(check_connection_to_site=True)
+    site.auth()
+    site.get_payments()
 
     input('Close browser and exit[enter] > ')
-    browser.close()
+    site.browser_controller.close()

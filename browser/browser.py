@@ -1,24 +1,23 @@
 import os
 from pathlib import Path
-from selenium.common.exceptions import NoSuchWindowException
+from selenium.common.exceptions import NoSuchWindowException, WebDriverException
 from selenium.webdriver import Firefox
 from typing import Optional
 
-from _browser_exceptions import DriverExistingExcept, BrowserLaunchException
-from _site import Site
+from ._browser_exceptions import DriverExistingExcept, BrowserLaunchException
 from configs import BrowserConfig
 
 
 class BrowserController:
 
+    cfg = BrowserConfig
+
     def __init__(self):
         """
         Class for action with browser
         """
-        self.cfg = BrowserConfig
         self.started_browser = False
         self.browser = self.start_up()
-        self.site = Site(self.browser)
 
     def start_up(self) -> Firefox:
         """
@@ -33,7 +32,7 @@ class BrowserController:
 
         browser = Firefox(executable_path=self.cfg.PATH_TO_WEB_DRIVER,
                           service_log_path=self.cfg.LOG_SELENIUM)
-
+        browser.implicitly_wait(2)
         self.started_browser = True
         return browser
 
@@ -60,7 +59,7 @@ class BrowserController:
             try:
                 self.browser.close()
                 self.started_browser = False
-            except NoSuchWindowException:
+            except (NoSuchWindowException, WebDriverException):
                 print('Browsing context has been discarded. Browser may already be closed!')
             return True
         else:
